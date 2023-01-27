@@ -44,5 +44,5 @@ def get_skins_prices_all(liste_url_per_champion):
     return final_dict
 
 def export_dict_to_json(file_path : str, my_dict : dict):
-    with open(file_path, "w") as outfile:
+    with open(file_path, "w", encoding='utf8') as outfile:
         json.dump(my_dict, outfile)
