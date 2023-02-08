@@ -1,5 +1,5 @@
 from database.database import DataBase
-
+import datetime
 
 test = DataBase()
 
@@ -9,6 +9,4 @@ print(test.query("SELECT * FROM champions"))
 
 print(test.query("SELECT * FROM champions WHERE ChampionId=266"))
 
-result = test.query("SELECT * FROM champions WHERE ChampionId=300")
-print(result)
-print(len(result))
+print(datetime.date.today())

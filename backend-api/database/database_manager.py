@@ -1,5 +1,6 @@
 from database import DataBase
 import logging
+import datetime
 
 class DataBaseManager(DataBase):
 
@@ -23,13 +24,13 @@ class DataBaseManager(DataBase):
         """
         try:
             self.query(
-                """INSERT INTO champions VALUES ({}, 'valeur 2', ...)""".format(champion_id,name,title))
+                """INSERT INTO champions VALUES ({}, {}, {})""".format(champion_id,name,title))
             return True
         except Exception as e:
             print(e)
             return False
 
-    def add_skin(self, champion_id : int, skin_id : int, skin_num :int, base_price : int):
+    def add_skin(self, champion_id : int, skin_id : int, name : str, skin_num :int, base_price : int):
         try:
             #First we check if the champion exist
             champion_result = self.query(
@@ -38,6 +39,14 @@ class DataBaseManager(DataBase):
                 # Can't add a skin with no matching champion
                 print("error : no matching champion found")
                 return False
+            #The champions exists so we can add the skin
+            self.query(
+                """INSERT INTO Skins VALUES ({}, {}, {})""".format(skin_id, name, skin_num))
+            self.query(
+                """INSERT INTO Champions_Skins VALUES ({}, {})""".format(champion_id, skin_id))
+            # Lastly we add the price
+            self.query(
+                """INSERT INTO SkinPrices VALUES ({}, {}, {})""".format(skin_id, base_price, datetime.date.today()))
             return True
         except Exception as e:
             print(e)
