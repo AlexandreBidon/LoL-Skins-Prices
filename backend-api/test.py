@@ -1,12 +1,16 @@
 from database.database import DataBase
+from database.database_manager import DataBaseManager
 import datetime
 
 test = DataBase()
+manager = DataBaseManager()
 
 test.list_tables()
 
 print(test.query("SELECT * FROM champions"))
 
-print(test.query("SELECT * FROM champions WHERE ChampionId=266"))
+manager.add_champion(15,"Teemo","Le boss")
+manager.add_champion(14,"Teema","Le boss")
 
-print(datetime.date.today())
+print(test.query("SELECT * FROM champions"))
+

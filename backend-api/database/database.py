@@ -22,6 +22,18 @@ class DataBase():
         self.cur.execute(query)
         return self.cur.fetchall()
 
+    def execute(self, query):
+        """
+        Anticiper les erreurs
+        """
+        try:
+            self.cur.execute(query)
+            self.conn.commit()
+        except Exception as e:
+            self.cur.execute("ROLLBACK")
+            self.conn.commit()
+            raise e
+
     def close(self):
         self.cur.close()
         self.conn.close()

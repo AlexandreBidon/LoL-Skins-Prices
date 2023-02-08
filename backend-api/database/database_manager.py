@@ -1,4 +1,4 @@
-from database import DataBase
+from database.database import DataBase
 import logging
 import datetime
 
@@ -11,7 +11,7 @@ class DataBaseManager(DataBase):
         ,user="postgres"
         ,password="lol_admin"
         ):
-        self.__init__(host=host,database=database,user=user,password=password)
+        super().__init__(host=host,database=database,user=user,password=password)
     
     def add_champion(self, champion_id : int, name : str, title : str):
         """
@@ -23,8 +23,8 @@ class DataBaseManager(DataBase):
         A bool to inform if the new champion was successfully added to the table
         """
         try:
-            self.query(
-                """INSERT INTO champions VALUES ({}, {}, {})""".format(champion_id,name,title))
+            self.execute(
+                """INSERT INTO champions VALUES ({}, '{}', '{}')""".format(champion_id,name,title))
             return True
         except Exception as e:
             print(e)
@@ -40,12 +40,12 @@ class DataBaseManager(DataBase):
                 print("error : no matching champion found")
                 return False
             #The champions exists so we can add the skin
-            self.query(
+            self.execute(
                 """INSERT INTO Skins VALUES ({}, {}, {})""".format(skin_id, name, skin_num))
-            self.query(
+            self.execute(
                 """INSERT INTO Champions_Skins VALUES ({}, {})""".format(champion_id, skin_id))
             # Lastly we add the price
-            self.query(
+            self.execute(
                 """INSERT INTO SkinPrices VALUES ({}, {}, {})""".format(skin_id, base_price, datetime.date.today()))
             return True
         except Exception as e:
@@ -53,4 +53,9 @@ class DataBaseManager(DataBase):
             return False
 
     def update_price(self, skin_id : int, new_price : int):
-        pass
+        try:
+            self.execute(
+                    """INSERT INTO SkinPrices VALUES ({}, {}, {})""".format(skin_id, new_price, datetime.date.today()))
+        except Exception as e:
+            print(e)
+            return False
