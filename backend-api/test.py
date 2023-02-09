@@ -1,15 +1,12 @@
-from database.database import DataBase
-from database.database_manager import DataBaseManager
-import datetime
+import requests
 
-test = DataBase()
-manager = DataBaseManager()
+url = 'http://0.0.0.0:8000/champion'
+myobj = {
+    "champion_id" : 4,
+    "name" : "test test",
+    "title" : "test def"
+}
 
-test.list_tables()
+x = requests.post(url, json = myobj)
 
-print(test.query("SELECT * FROM champions"))
-
-manager.add_skin(14,1,"skin test",3,1800)
-#manager.delete_skin(1)
-print(manager.skin_price_history(1))
-
+print(x.text)

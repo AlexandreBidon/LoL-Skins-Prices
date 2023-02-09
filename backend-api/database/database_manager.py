@@ -27,14 +27,14 @@ class DataBaseManager(DataBase):
                 """INSERT INTO champions VALUES ({}, '{}', '{}')""".format(champion_id,name,title))
             return True
         except Exception as e:
-            print(e)
+            logging.error(e)
             return False
 
     def delete_champion(self, champion_id):
         try:
             self.execute("""DELETE FROM champions WHERE ChampionId={}""".format(champion_id))
         except Exception as e:
-            print(e)
+            logging.error(e)
 
     def add_skin(self, champion_id : int, skin_id : int, name : str, skin_num :int, base_price : int):
         try:
@@ -43,7 +43,7 @@ class DataBaseManager(DataBase):
                 """SELECT * FROM champions WHERE ChampionId={}""".format(champion_id))
             if len(champion_result) == 0:
                 # Can't add a skin with no matching champion
-                print("error : no matching champion found")
+                logging.error("error : no matching champion found")
                 return False
             #The champions exists so we can add the skin
             self.execute(
@@ -55,7 +55,7 @@ class DataBaseManager(DataBase):
                 """INSERT INTO SkinPrices VALUES ({}, {}, '{}')""".format(skin_id, base_price, datetime.date.today()))
             return True
         except Exception as e:
-            print(e)
+            logging.error(e)
             return False
 
     def delete_skin(self, skin_id :int):
@@ -64,14 +64,21 @@ class DataBaseManager(DataBase):
             self.execute("""DELETE FROM SkinPrices WHERE SkinId={}""".format(skin_id))
             self.execute("""DELETE FROM Skins WHERE SkinId={}""".format(skin_id))
         except Exception as e:
-            print(e)
+            logging.error(e)
+
+    def skin_list(self):
+        try:
+            result = self.query("""SELECT * FROM Skins""")
+            return(result)
+        except Exception as e:
+            logging.error(e)
 
     def update_price(self, skin_id : int, new_price : int):
         try:
             self.execute(
                     """INSERT INTO SkinPrices VALUES ({}, {}, {})""".format(skin_id, new_price, datetime.date.today()))
         except Exception as e:
-            print(e)
+            logging.error(e)
             return False
     
     def skin_price_history(self, skin_id : int):
@@ -80,5 +87,5 @@ class DataBaseManager(DataBase):
                         """SELECT * FROM SkinPrices WHERE SkinId={}""".format(skin_id))
             return result
         except Exception as e:
-            print(e)
+            logging.error(e)
             return False

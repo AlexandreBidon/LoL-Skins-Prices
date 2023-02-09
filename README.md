@@ -9,9 +9,10 @@ Note : This repo is part of a last year project at ENSAI school. The subject can
 - A postgres database
 
 ## How to run
+### Demonstration
 
 
-
+### Launch the tests
 
 
 ### Authors
