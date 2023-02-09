@@ -9,8 +9,7 @@ test.list_tables()
 
 print(test.query("SELECT * FROM champions"))
 
-manager.add_champion(15,"Teemo","Le boss")
-manager.add_champion(14,"Teema","Le boss")
-
-print(test.query("SELECT * FROM champions"))
+manager.add_skin(14,1,"skin test",3,1800)
+#manager.delete_skin(1)
+print(manager.skin_price_history(1))
 
