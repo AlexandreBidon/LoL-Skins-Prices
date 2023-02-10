@@ -9,14 +9,17 @@ The api features endpoints in the following categories :
 - [Management](#management-endpoints)
 
 **Note**: All the examples featured in this section require the package `requests`. You can import this package using the following command :
->import requests
+```python
+import requests
+```
 ## Champions endpoints
 
-#### List all champions
+### List all champions
+**Endpoint type : GET**
 This endpoint lists all the champions that are present in the database. It is availabe at the following address 
 > /champions/all
 
-##### Example
+#### Example
 Here is a code exemple to use this endpoint. You have to replace the URL with the URL of the API (usually http://0.0.0.0:8000).
 
 ```python
@@ -24,11 +27,12 @@ url=#Specify the API address here
 result = requests.get(url + '/champions/all')
 print(result.text)
 ```
-#### Show a champion
+### Show a champion
+**Endpoint type : GET**
 This endpoint shows a specific champion. It is availabe at the following address. You have to provide the id of the champion you want to see.
 > /champions/{id}
 
-##### Example
+#### Example
 Here is a code exemple to use this endpoint. You have to replace the URL with the URL of the API (usually http://0.0.0.0:8000). You also have to add the `champion_id`.
 
 ```python
@@ -37,13 +41,40 @@ champion_id=#Specify the id of the champion you want to see
 result = requests.get(url + '/champions/' + champion_id)
 print(result.text)
 ```
-#### Create a champion
+### Create a champion
+**Endpoint type : POST**
+This endpoint is used to create a new champion. It is availabe at the following address. You have to send some data explaining the new champion.
+> /champions
 
-##### Example
+The data sent must be in the following format :
+```json
+{
+    "champion_id" : int,
+    "name" : string,
+    "title" : string
+}
+```
+#### Example
+Here is a code exemple to use this endpoint. You have to replace the URL with the URL of the API (usually http://0.0.0.0:8000).
+```python
+url=#Specify the API address here
+champion_data = {
+    "champion_id" : 24,
+    "name" : "Jax",
+    "title" : "Maître d'armes"
+}
+result = requests.post(url + '/champions/', json = champion_data)
+print(result.text)
+# If the result is {success : True} then the champion was added.
+# You can then see the champion
+result = requests.post(url + '/champions/all')
+print(result.text)
+```
+### Delete a champion
+**Endpoint type : DELETE**
 
-#### Delete a champion
+#### Example
 
-##### Example
 ## Skins endpoints
 
 ## Skin Price endpoints
