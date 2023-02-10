@@ -205,3 +205,19 @@ INFO:root:[(41,)]
 INFO:root:Champion successfully deleted!
 INFO:root:Listing all champions
 INFO:root:Listing all skins
+INFO:root:API start
+INFO:root:Resetting the database
+INFO:root:Database successfully reset!
+INFO:root:Creating the following champion : champion_id=4 name='test test' title='test def'
+INFO:root:Champion successfully created!
+INFO:root:Creating the following skin : champion_id=4 skin_id=41 name='Skin test' skin_num=1 base_price=2000
+INFO:root:Skin successfully created!
+INFO:root:Listing all champions
+INFO:root:Listing champion with id : 4
+INFO:root:Listing all skins
+INFO:root:Deleting the champion with id : 4
+INFO:root:Deleting skins associated with champion 4
+INFO:root:[(41,)]
+INFO:root:Champion successfully deleted!
+INFO:root:Listing all champions
+INFO:root:Listing all skins

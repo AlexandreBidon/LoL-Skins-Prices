@@ -18,6 +18,9 @@ class LoLSkinManager():
     def list_all_champions(self):
         return self.__db_manager.champion_list()
 
+    def show_champion(self, champion_id : int):
+        return self.__db_manager.show_champion(champion_id= champion_id)
+
     def add_champion(self, champion : ChampionModel):
         logging.info("Creating the following champion : {}".format(champion))
         result = self.__db_manager.add_champion(

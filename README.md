@@ -14,7 +14,8 @@ Note : This repo is part of a last year project at ENSAI school. The subject can
 
 ### Launch the tests
 
-
+## How it works
+The list of all the endpoints can be [found here](docs/ENDPOINTS.md).
 ### Authors
 - Tiroumalai Freddy ([tiroumalaifreddy](https://github.com/tiroumalaifreddy))
 - Bidon Alexandre ([AlexandreBidon](https://github.com/AlexandreBidon))

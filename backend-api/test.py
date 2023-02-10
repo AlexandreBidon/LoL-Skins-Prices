@@ -27,6 +27,9 @@ print(y.text)
 x = requests.get(url + '/champions/all')
 print(x.text)
 
+x = requests.get(url + '/champions/4')
+print(x.text)
+
 x = requests.get(url + '/skins/all')
 print(x.text)
 

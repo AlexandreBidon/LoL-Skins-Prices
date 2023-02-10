@@ -23,6 +23,11 @@ class Server():
             logging.info("Listing all champions")
             return self.skin_manager.list_all_champions()
 
+        @self.app.get("/champions/{championID}")
+        async def show_champion(championID : int):
+            logging.info("Listing champion with id : {}".format(championID))
+            return self.skin_manager.show_champion(champion_id=championID)
+
         @self.app.post("/champions")
         async def create_champion(champion : ChampionModel):
             result = self.skin_manager.add_champion(champion=champion)

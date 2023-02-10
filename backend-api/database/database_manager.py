@@ -3,7 +3,8 @@ import logging
 import datetime
 
 class DataBaseManager(DataBase):
-
+    # TODO : raise HTTP Error (404 or others) when it's an error
+    
     def __init__(
         self
         ,host="0.0.0.0"
@@ -52,6 +53,14 @@ class DataBaseManager(DataBase):
             return(result)
         except Exception as e:
             logging.error(e)
+    
+    def show_champion(self, champion_id):
+        try:
+            result = self.query("""SELECT * FROM champions WHERE ChampionId={}""".format(champion_id))
+            return(result)
+        except Exception as e:
+            logging.error(e)
+            return({'champion not found'})
 
     ### SKINS ###
 
