@@ -6,6 +6,7 @@ The api features endpoints in the following categories :
 - [Champions](#champions-endpoints)
 - [Skins](#skins-endpoints)
 - [Skin Price](#skin-price-endpoints)
+- [Users](#users-endpoints)
 - [Management](#management-endpoints)
 
 **Note**: All the examples featured in this section require the package `requests`. You can import this package using the following command :
@@ -93,5 +94,7 @@ print(result.text)
 ## Skins endpoints
 
 ## Skin Price endpoints
+
+## Users endpoints
 
 ## Management endpoints
