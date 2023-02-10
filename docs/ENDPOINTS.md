@@ -3,10 +3,10 @@
 [GO BACK TO HOME](../README.md)
 
 The api features endpoints in the following categories :
--[Champions](#champions-endpoints)
--[Skins](#skins-endpoints)
--[Skin Price](#skin-price-endpoints)
--[Management](#management-endpoints)
+- [Champions](#champions-endpoints)
+- [Skins](#skins-endpoints)
+- [Skin Price](#skin-price-endpoints)
+- [Management](#management-endpoints)
 
 **Note**: All the examples featured in this section require the package `requests`. You can import this package using the following command :
 >import requests
