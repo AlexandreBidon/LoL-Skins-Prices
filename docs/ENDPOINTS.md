@@ -1,6 +1,6 @@
 # API ENDPOINTS
 
-[GO BACK TO HOME](../README.md)
+[GO BACK TO HOME](https://github.com/AlexandreBidon/LoL-Skins-Prices)
 
 The api features endpoints in the following categories :
 - [Champions](#champions-endpoints)

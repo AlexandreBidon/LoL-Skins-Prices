@@ -1,4 +1,7 @@
 # League of Legends Skins Prices
+<p align="center">
+    <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/main/docs/assets/main_title.jpg" width="100%">
+</p>
 
 <p align="center">
   <a href="#presentation">Presentation</a> •
