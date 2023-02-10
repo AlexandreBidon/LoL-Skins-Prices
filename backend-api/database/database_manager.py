@@ -13,6 +13,8 @@ class DataBaseManager(DataBase):
         ):
         super().__init__(host=host,database=database,user=user,password=password)
     
+    ### CHAMPIONS ###
+
     def add_champion(self, champion_id : int, name : str, title : str):
         """
         Adds a champion into the champions table
@@ -32,9 +34,26 @@ class DataBaseManager(DataBase):
 
     def delete_champion(self, champion_id):
         try:
+            logging.info("Deleting skins associated with champion {}".format(champion_id))
+            related_skins = self.query("""SELECT SkinID FROM Champions_Skins WHERE ChampionId={}""".format(champion_id))
+            logging.info(related_skins)
+            if len(related_skins)>0:
+                self.delete_skin_tuple(related_skins[0])
+            self.execute("""DELETE FROM Champions_Skins WHERE ChampionId={}""".format(champion_id))
             self.execute("""DELETE FROM champions WHERE ChampionId={}""".format(champion_id))
+            return True
         except Exception as e:
             logging.error(e)
+            return False
+
+    def champion_list(self):
+        try:
+            result = self.query("""SELECT * FROM champions""")
+            return(result)
+        except Exception as e:
+            logging.error(e)
+
+    ### SKINS ###
 
     def add_skin(self, champion_id : int, skin_id : int, name : str, skin_num :int, base_price : int):
         try:
@@ -58,6 +77,13 @@ class DataBaseManager(DataBase):
             logging.error(e)
             return False
 
+    def delete_skin_tuple(self, skin_id_tuple :tuple):
+        try:
+            for skin_id in skin_id_tuple:
+                self.delete_skin(skin_id=skin_id)
+        except Exception as e:
+            logging.error(e)
+
     def delete_skin(self, skin_id :int):
         try:
             self.execute("""DELETE FROM Champions_Skins WHERE SkinId={}""".format(skin_id))
@@ -73,6 +99,8 @@ class DataBaseManager(DataBase):
         except Exception as e:
             logging.error(e)
 
+    ### SKIN PRICE ###
+
     def update_price(self, skin_id : int, new_price : int):
         try:
             self.execute(
@@ -86,6 +114,19 @@ class DataBaseManager(DataBase):
             result = self.query(
                         """SELECT * FROM SkinPrices WHERE SkinId={}""".format(skin_id))
             return result
+        except Exception as e:
+            logging.error(e)
+            return False
+
+    ### RESET DATABASE ###
+    
+    def reset_db(self):
+        try:
+            self.execute("""DELETE FROM SkinPrices""")
+            self.execute("""DELETE FROM Skins""")
+            self.execute("""DELETE FROM Champions_Skins""")
+            self.execute("""DELETE FROM champions""")
+            return True
         except Exception as e:
             logging.error(e)
             return False

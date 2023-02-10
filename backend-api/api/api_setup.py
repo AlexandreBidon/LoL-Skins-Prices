@@ -1,3 +1,4 @@
+from requests.exceptions import HTTPError
 from fastapi import FastAPI
 import logging
 
@@ -15,32 +16,43 @@ class Server():
         async def get():
             return "Welcome to the LoL Skin Price API!"
 
-        @self.app.get("/skin/all")
+        ### CHAMPIONS ###
+
+        @self.app.get("/champions/all")
+        async def show_all_champions():
+            logging.info("Listing all champions")
+            return self.skin_manager.list_all_champions()
+
+        @self.app.post("/champions")
+        async def create_champion(champion : ChampionModel):
+            result = self.skin_manager.add_champion(champion=champion)
+            return({"success":result})
+
+        @self.app.delete("/champions/{championID}")
+        async def delete_champion(championID : int):
+            result = self.skin_manager.delete_champion(championId=championID)
+            return({"success":result})
+        
+        ### SKINS ###
+
+        @self.app.post("/skins")
+        async def create_skin(skin : SkinModel):
+            result = self.skin_manager.add_skin(skin=skin)
+            return({"success":result})
+
+        @self.app.get("/skins/all")
         async def show_all_skins():
             logging.info("Listing all skins")
             return self.skin_manager.list_all_skins()
 
-        @self.app.get("/skin/champion={}")
+        @self.app.get("/skins/champion={}")
         async def show_champion_skins(championID):
             logging.info("Listing all skins from champion {}".format(championID))
             return
 
-        @self.app.post("/champion")
-        async def create_champion(champion : ChampionModel):
-            logging.info("Creating the following champion : {}".format(champion))
-            result = self.skin_manager.add_champion(champion=champion)
-            if result:
-                logging.info("Champion successfully created!")
-            else:
-                logging.info("Couldn't create champion")
-            return({"success":result})
+        ### RESET
 
-        @self.app.post("/skin")
-        async def create_skin(skin : SkinModel):
-            logging.info("Creating the following skin : {}".format(skin))
-            result = self.skin_manager.add_skin(skin=skin)
-            if result:
-                logging.info("Skin successfully created!")
-            else:
-                logging.info("Couldn't create skin")
+        @self.app.get("/management/reset")
+        async def reset():
+            result = self.skin_manager.reset()
             return({"success":result})
