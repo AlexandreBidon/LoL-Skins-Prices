@@ -3,7 +3,7 @@ import datetime
 import smtplib
 from email.message import EmailMessage
 
-class DataBaseManager():
+class MailManager():
 
     def __init__(
         self,
