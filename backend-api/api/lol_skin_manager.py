@@ -63,6 +63,17 @@ class LoLSkinManager():
             logging.info("Couldn't create skin")
         return(result)
     
+    ### PRICES ###
+
+    def update_price(self, skin_id : int, new_price : int):
+        return self.__db_manager.update_price(skin_id=skin_id,new_price=new_price)
+
+    def skin_price_history(self, skin_id : int):
+        return self.__db_manager.skin_price_history(skin_id=skin_id)
+        
+    def current_price(self, skin_id :int):
+        return self.__db_manager.current_price(skin_id=skin_id)
+        
     ### RESET DB ###
 
     def reset(self):

@@ -114,6 +114,7 @@ class DataBaseManager(DataBase):
         try:
             self.execute(
                     """INSERT INTO SkinPrices VALUES ({}, {}, {})""".format(skin_id, new_price, datetime.date.today()))
+            return True
         except Exception as e:
             logging.error(e)
             return False
@@ -121,10 +122,18 @@ class DataBaseManager(DataBase):
     def skin_price_history(self, skin_id : int):
         try:
             result = self.query(
-                        """SELECT * FROM SkinPrices WHERE SkinId={}""".format(skin_id))
+                        """SELECT * FROM SkinPrices WHERE SkinId={} ORDER BY ChangedOn DESC""".format(skin_id))
             return result
         except Exception as e:
             logging.error(e)
+            return False
+    
+    def current_price(self, skin_id : int):
+        try:
+            result = self.query(
+                        """SELECT * FROM SkinPrices WHERE SkinId={} ORDER BY ChangedOn DESC""".format(skin_id))
+            return result[0]
+        except Exception as e:
             return False
 
     ### RESET DATABASE ###
@@ -132,8 +141,8 @@ class DataBaseManager(DataBase):
     def reset_db(self):
         try:
             self.execute("""DELETE FROM SkinPrices""")
-            self.execute("""DELETE FROM Skins""")
             self.execute("""DELETE FROM Champions_Skins""")
+            self.execute("""DELETE FROM Skins""")
             self.execute("""DELETE FROM champions""")
             return True
         except Exception as e:

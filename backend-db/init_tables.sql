@@ -28,4 +28,30 @@ CREATE TABLE IF NOT EXISTS SkinPrices (
 
 
 INSERT INTO champions
-VALUES (266, 'Aatrox', 'the Darkin Blade'), (103, 'Ahri', 'the Nine-Tailed Fox');
+VALUES 
+(266, 'Aatrox', 'the Darkin Blade'), 
+(103, 'Ahri', 'the Nine-Tailed Fox'),
+(107, 'Rengar', 'the Pridestalker'),
+(268, 'Azir', 'the Emperor of the Sands'),
+(245, 'Ekko', 'the Boy Who Shattered Time');
+
+INSERT INTO Skins
+VALUES
+(268005, 'Elderwood Azir', 5),
+(268004, 'Warring Kingdoms Azir', 4),
+(245001, 'Sandstorm Ekko', 1);
+
+INSERT INTO Champions_Skins
+VALUES
+(268, 268005),
+(268, 268004),
+(245, 245001);
+
+INSERT INTO SkinPrices
+VALUES
+(268005, 1820, '2023-02-10'),
+(268005, 1500, '2023-02-09'),
+(268005, 1820, '2023-02-01'),
+(268004, 1820, '2023-02-09'),
+(268004, 1520, '2023-02-01'),
+(245001, 1820, '2023-02-09');

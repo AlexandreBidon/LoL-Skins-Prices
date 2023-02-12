@@ -15,26 +15,12 @@ skin_data = {
     "skin_num":1,
     "base_price":2000
 }
-y = requests.get(url + '/management/reset')
-print(y.text)
-
-y = requests.post(url + '/champions', json = champion_data)
-print(y.text)
-
-y = requests.post(url + '/skins', json = skin_data)
-print(y.text)
-
-x = requests.get(url + '/champions/all')
-print(x.text)
-
-x = requests.get(url + '/champions/4')
-print(x.text)
-
-x = requests.get(url + '/skins/all')
-print(x.text)
-
-x = requests.delete(url + '/champions/4')
-print(x.text)
+# y = requests.get(url + '/management/reset')
+# print(y.text)
+# y = requests.post(url + '/champions', json = champion_data)
+# print(y.text)
+# y = requests.post(url + '/skins', json = skin_data)
+# print(y.text)
 
 x = requests.get(url + '/champions/all')
 print(x.text)
@@ -42,3 +28,8 @@ print(x.text)
 x = requests.get(url + '/skins/all')
 print(x.text)
 
+x = requests.get(url + '/prices/history/skin_id=268005')
+print(x.text)
+
+x = requests.get(url + '/prices/current/skin_id=268005')
+print(x.text)

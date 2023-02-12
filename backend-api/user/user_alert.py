@@ -1,4 +1,6 @@
-from api.user_account import UserAccount
+from user.user_account import UserAccount
+from typing import List
+from api.data_model.price_model import Price
 
 class UserAlert():
     """
@@ -11,7 +13,7 @@ class UserAlert():
     def subscribe(self, user : UserAccount):
         self.subscribers.append(user)
     
-    def notify(self, sales_data):
+    def notify(self, sales_data : List[Price]):
         for user in self.subscribers:
             user.notify(sales_data)
         

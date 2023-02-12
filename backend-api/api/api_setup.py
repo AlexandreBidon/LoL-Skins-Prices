@@ -1,15 +1,17 @@
 from requests.exceptions import HTTPError
 from fastapi import FastAPI
 import logging
+from typing import List
 
 from api.lol_skin_manager import LoLSkinManager
 
 from api.data_model.champion_model import ChampionModel
 from api.data_model.skin_model import SkinModel
 from api.data_model.user_model import UserModel
+from api.data_model.price_model import Price
 
-from api.user_alert import UserAlert
-from api.user_account import UserAccount
+from user.user_alert import UserAlert
+from user.user_account import UserAccount
 
 
 class Server():
@@ -40,7 +42,7 @@ class Server():
             result = self.skin_manager.add_champion(champion=champion)
             return({"success":result})
 
-        @self.app.delete("/champions/{championID}")
+        @self.app.delete("/champions/champion_id={championID}")
         async def delete_champion(championID : int):
             result = self.skin_manager.delete_champion(championId=championID)
             return({"success":result})
@@ -57,11 +59,33 @@ class Server():
             logging.info("Listing all skins")
             return self.skin_manager.list_all_skins()
 
-        @self.app.get("/skins/champion={}")
+        @self.app.get("/skins/champion_id={championID}")
         async def show_champion_skins(championID):
             logging.info("Listing all skins from champion {}".format(championID))
             return
         
+        ### SKINS PRICES ###
+
+        @self.app.post("/prices")
+        async def update_price(price_list : List[Price]):
+            logging.info("Updating skins prices")
+            updated_skin_list = []
+            for price in price_list:
+                if self.skin_manager.update_price(skin_id=price.skin_id,new_price=price.new_price):
+                    updated_skin_list.append(price)
+            self.user_alert.notify(updated_skin_list)
+            return({"skins_prices_updated" : [price.skin_id for price in updated_skin_list]})
+
+        @self.app.get("/prices/history/skin_id={skinID}")
+        async def price_history(skinID):
+            logging.info("Listing price history for skin id {}".format(skinID))
+            return self.skin_manager.skin_price_history(skin_id= skinID)
+
+        @self.app.get("/prices/current/skin_id={skinID}")
+        async def current_price(skinID):
+            logging.info("SHowing current price for skin id {}".format(skinID))
+            return self.skin_manager.current_price(skin_id= skinID)
+
         ### USERS ###
 
         @self.app.post("/users")
