@@ -16,10 +16,25 @@ class LoLSkinManager():
     ### CHAMPIONS ###
 
     def list_all_champions(self):
-        return self.__db_manager.champion_list()
+        result = self.__db_manager.champion_list()
+        result_dict = []
+        for champion in result:
+            champion_dict = {
+                "champion_id" : champion[0],
+                "champion_name" : champion[1],
+                "champion_title" : champion[2] 
+            }
+            result_dict.append(champion_dict)
+        return result_dict
 
     def show_champion(self, champion_id : int):
-        return self.__db_manager.show_champion(champion_id= champion_id)
+        champion = self.__db_manager.show_champion(champion_id= champion_id)[0]
+        champion_dict = {
+                "champion_id" : champion[0],
+                "champion_name" : champion[1],
+                "champion_title" : champion[2] 
+            }
+        return champion_dict
 
     def add_champion(self, champion : ChampionModel):
         logging.info("Creating the following champion : {}".format(champion))
@@ -73,7 +88,7 @@ class LoLSkinManager():
         
     def current_price(self, skin_id :int):
         return self.__db_manager.current_price(skin_id=skin_id)
-        
+
     ### RESET DB ###
 
     def reset(self):

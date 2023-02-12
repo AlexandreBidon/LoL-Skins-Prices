@@ -25,6 +25,12 @@ skin_data = {
 x = requests.get(url + '/champions/all')
 print(x.text)
 
+x = requests.get(url + '/champions/champion_id=1')
+print(x.text)
+
+x = requests.get(url + '/champions/champion_id=266')
+print(x.text)
+
 x = requests.get(url + '/skins/all')
 print(x.text)
 

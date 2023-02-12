@@ -1,5 +1,4 @@
-from requests.exceptions import HTTPError
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 import logging
 from typing import List
 
@@ -30,12 +29,18 @@ class Server():
         @self.app.get("/champions/all")
         async def show_all_champions():
             logging.info("Listing all champions")
-            return self.skin_manager.list_all_champions()
+            try :
+                return self.skin_manager.list_all_champions()
+            except:
+                return HTTPException(status_code=404, detail="Couldn't list all champions")
 
-        @self.app.get("/champions/{championID}")
+        @self.app.get("/champions/champion_id={championID}")
         async def show_champion(championID : int):
             logging.info("Listing champion with id : {}".format(championID))
-            return self.skin_manager.show_champion(champion_id=championID)
+            try:
+                return self.skin_manager.show_champion(champion_id=championID)
+            except:
+                return HTTPException(status_code=404, detail="Couldn't find this champion")
 
         @self.app.post("/champions")
         async def create_champion(champion : ChampionModel):
