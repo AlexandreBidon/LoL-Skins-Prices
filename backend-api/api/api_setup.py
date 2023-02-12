@@ -3,14 +3,21 @@ from fastapi import FastAPI
 import logging
 
 from api.lol_skin_manager import LoLSkinManager
+
 from api.data_model.champion_model import ChampionModel
 from api.data_model.skin_model import SkinModel
+from api.data_model.user_model import UserModel
+
+from api.user_alert import UserAlert
+from api.user_account import UserAccount
+
 
 class Server():
 
     def __init__(self):
         self.app = FastAPI()
         self.skin_manager = LoLSkinManager()
+        self.user_alert = UserAlert()
 
         @self.app.get("/")
         async def get():
@@ -54,10 +61,24 @@ class Server():
         async def show_champion_skins(championID):
             logging.info("Listing all skins from champion {}".format(championID))
             return
+        
+        ### USERS ###
 
-        ### RESET
+        @self.app.post("/users")
+        async def create_user(user : UserModel):
+            logging.info("Creating new user with name {}".format(user.name))
+            account = UserAccount(
+                name = user.name,
+                mail= user.mail,
+                skin_list= user.skin_list
+            )
+            self.user_alert.subscribe(account)
+            return({"success":True})
+
+        ### MANAGEMENT ###
 
         @self.app.get("/management/reset")
         async def reset():
+            self.user_alert.reset()
             result = self.skin_manager.reset()
             return({"success":result})

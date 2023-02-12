@@ -15,6 +15,5 @@ class UserAccount():
             self.mail = mail
             self.skin_list = skin_list
 
-
-
-    
+    def notify(self,sales_data):
+        pass
