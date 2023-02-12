@@ -62,9 +62,13 @@ class Server():
         @self.app.get("/skins/all")
         async def show_all_skins():
             logging.info("Listing all skins")
-            return self.skin_manager.list_all_skins()
+            try :
+                return self.skin_manager.list_all_skins()
+            except:
+                return HTTPException(status_code=404, detail="Couldn't list all skins")
 
-        @self.app.get("/skins/champion_id={championID}")
+
+        @self.app.get("/skins/champion_id={championID}") #TODO
         async def show_champion_skins(championID):
             logging.info("Listing all skins from champion {}".format(championID))
             return
@@ -84,12 +88,18 @@ class Server():
         @self.app.get("/prices/history/skin_id={skinID}")
         async def price_history(skinID):
             logging.info("Listing price history for skin id {}".format(skinID))
-            return self.skin_manager.skin_price_history(skin_id= skinID)
+            try:
+                return self.skin_manager.skin_price_history(skin_id= skinID)
+            except:
+                return HTTPException(status_code=404, detail= "Couldn't find price history for skin id {}".format(skinID)) 
 
         @self.app.get("/prices/current/skin_id={skinID}")
         async def current_price(skinID):
             logging.info("SHowing current price for skin id {}".format(skinID))
-            return self.skin_manager.current_price(skin_id= skinID)
+            try:
+                return self.skin_manager.current_price(skin_id= skinID)
+            except:
+                return HTTPException(status_code=404, detail= "Couldn't find current price for skin id {}".format(skinID))
 
         ### USERS ###
 

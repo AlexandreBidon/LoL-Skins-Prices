@@ -20,9 +20,9 @@ class LoLSkinManager():
         result_dict = []
         for champion in result:
             champion_dict = {
-                "champion_id" : champion[0],
-                "champion_name" : champion[1],
-                "champion_title" : champion[2] 
+                "id" : champion[0],
+                "name" : champion[1],
+                "title" : champion[2] 
             }
             result_dict.append(champion_dict)
         return result_dict
@@ -30,9 +30,9 @@ class LoLSkinManager():
     def show_champion(self, champion_id : int):
         champion = self.__db_manager.show_champion(champion_id= champion_id)[0]
         champion_dict = {
-                "champion_id" : champion[0],
-                "champion_name" : champion[1],
-                "champion_title" : champion[2] 
+                "id" : champion[0],
+                "name" : champion[1],
+                "title" : champion[2] 
             }
         return champion_dict
 
@@ -61,8 +61,17 @@ class LoLSkinManager():
     ### SKINS ###
 
     def list_all_skins(self):
-        return self.__db_manager.skin_list()
-    
+        result = self.__db_manager.skin_list()
+        result_dict = []
+        for skin in result:
+            skin_dict = {
+                "id" : skin[0],
+                "name" : skin[1],
+                "num" : skin[2] 
+            }
+            result_dict.append(skin_dict)
+        return result_dict
+
     def add_skin(self, skin : SkinModel):
         logging.info("Creating the following skin : {}".format(skin))
         result = self.__db_manager.add_skin(
@@ -84,10 +93,25 @@ class LoLSkinManager():
         return self.__db_manager.update_price(skin_id=skin_id,new_price=new_price)
 
     def skin_price_history(self, skin_id : int):
-        return self.__db_manager.skin_price_history(skin_id=skin_id)
+        result = self.__db_manager.skin_price_history(skin_id=skin_id)
+        result_dict = []
+        for price in result:
+            price_dict = {
+                "skin_id" : price[0],
+                "price" : price[1],
+                "changed_on" : price[2] 
+            }
+            result_dict.append(price_dict)
+        return result_dict
         
     def current_price(self, skin_id :int):
-        return self.__db_manager.current_price(skin_id=skin_id)
+        price =  self.__db_manager.current_price(skin_id=skin_id)
+        price_dict = {
+                "skin_id" : price[0],
+                "price" : price[1],
+                "changed_on" : price[2] 
+            }
+        return price_dict
 
     ### RESET DB ###
 
