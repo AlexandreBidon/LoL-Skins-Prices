@@ -113,7 +113,7 @@ class DataBaseManager(DataBase):
     def update_price(self, skin_id : int, new_price : int):
         try:
             self.execute(
-                    """INSERT INTO SkinPrices VALUES ({}, {}, {})""".format(skin_id, new_price, datetime.date.today()))
+                    """INSERT INTO SkinPrices VALUES ({}, {}, '{}')""".format(skin_id, new_price, datetime.date.today()))
             return True
         except Exception as e:
             logging.error(e)
