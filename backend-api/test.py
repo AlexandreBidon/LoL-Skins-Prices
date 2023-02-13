@@ -18,7 +18,7 @@ skin_data = {
 
 user_data = {
     "name": "Alexandre",
-    "mail" : "alexandre@",
+    "mail" : "alexandre.bidon.44@gmail.com",
     "skin_list" : [268005,268004]
 }
 

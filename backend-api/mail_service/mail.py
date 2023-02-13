@@ -18,12 +18,17 @@ class Mail():
         to_mail : str,
         html_content : str
     ):
-        msg = EmailMessage()
-        msg['Subject'] = subject
-        msg['From'] = self.email_address
-        msg['To'] = to_mail
-        msg.set_content(html_content)
-        with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
-            smtp.login(self.email_address, self.email_password)
-            smtp.send_message(msg)
+        try:
+            msg = EmailMessage()
+            msg['Subject'] = subject
+            msg['From'] = self.email_address
+            msg['To'] = to_mail
+            msg.set_content(html_content, subtype='html')
+            with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
+                smtp.login(self.email_address, self.email_password)
+                smtp.send_message(msg)
+            logging.info("Sending mail to {}".format(to_mail))
+        except Exception as e:
+            logging.info("Couldn't send mail to {}".format(to_mail))
+            logging.error(e)
 
