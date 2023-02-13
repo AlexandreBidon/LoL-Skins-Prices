@@ -2,6 +2,8 @@ from database.database import DataBase
 import logging
 import datetime
 
+logger = logging.getLogger('python_logs')
+
 class DataBaseManager(DataBase):
     # TODO : raise HTTP Error (404 or others) when it's an error
     
@@ -30,21 +32,21 @@ class DataBaseManager(DataBase):
                 """INSERT INTO champions VALUES ({}, '{}', '{}')""".format(champion_id,name,title))
             return True
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
             return False
 
     def delete_champion(self, champion_id):
         try:
-            logging.info("Deleting skins associated with champion {}".format(champion_id))
+            logger.info("Deleting skins associated with champion {}".format(champion_id))
             related_skins = self.query("""SELECT SkinID FROM Champions_Skins WHERE ChampionId={}""".format(champion_id))
-            logging.info(related_skins)
+            logger.info(related_skins)
             if len(related_skins)>0:
                 self.delete_skin_tuple(related_skins[0])
             self.execute("""DELETE FROM Champions_Skins WHERE ChampionId={}""".format(champion_id))
             self.execute("""DELETE FROM champions WHERE ChampionId={}""".format(champion_id))
             return True
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
             return False
 
     def champion_list(self):
@@ -52,14 +54,14 @@ class DataBaseManager(DataBase):
             result = self.query("""SELECT * FROM champions""")
             return(result)
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
     
     def show_champion(self, champion_id):
         try:
             result = self.query("""SELECT * FROM champions WHERE ChampionId={}""".format(champion_id))
             return(result)
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
             return({'champion not found'})
 
     ### SKINS ###
@@ -83,7 +85,7 @@ class DataBaseManager(DataBase):
                 """INSERT INTO SkinPrices VALUES ({}, {}, '{}')""".format(skin_id, base_price, datetime.date.today()))
             return True
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
             return False
 
     def delete_skin_tuple(self, skin_id_tuple :tuple):
@@ -91,7 +93,7 @@ class DataBaseManager(DataBase):
             for skin_id in skin_id_tuple:
                 self.delete_skin(skin_id=skin_id)
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
 
     def delete_skin(self, skin_id :int):
         try:
@@ -99,14 +101,14 @@ class DataBaseManager(DataBase):
             self.execute("""DELETE FROM SkinPrices WHERE SkinId={}""".format(skin_id))
             self.execute("""DELETE FROM Skins WHERE SkinId={}""".format(skin_id))
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
 
     def skin_list(self):
         try:
             result = self.query("""SELECT * FROM Skins""")
             return(result)
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
 
     ### SKIN PRICE ###
 
@@ -116,7 +118,7 @@ class DataBaseManager(DataBase):
                     """INSERT INTO SkinPrices VALUES ({}, {}, '{}')""".format(skin_id, new_price, datetime.date.today()))
             return True
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
             return False
     
     def skin_price_history(self, skin_id : int):
@@ -125,7 +127,7 @@ class DataBaseManager(DataBase):
                         """SELECT * FROM SkinPrices WHERE SkinId={} ORDER BY ChangedOn DESC""".format(skin_id))
             return result
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
             return False
     
     def current_price(self, skin_id : int):
@@ -146,5 +148,5 @@ class DataBaseManager(DataBase):
             self.execute("""DELETE FROM champions""")
             return True
         except Exception as e:
-            logging.error(e)
+            logger.error(e)
             return False

@@ -12,6 +12,7 @@ from api.data_model.price_model import Price
 from user.user_alert import UserAlert
 from user.user_account import UserAccount
 
+logger = logging.getLogger('python_logs')
 
 class Server():
 
@@ -28,7 +29,7 @@ class Server():
 
         @self.app.get("/champions/all")
         async def show_all_champions():
-            logging.info("Listing all champions")
+            logger.info("Listing all champions")
             try :
                 return self.skin_manager.list_all_champions()
             except:
@@ -36,7 +37,7 @@ class Server():
 
         @self.app.get("/champions/champion_id={championID}")
         async def show_champion(championID : int):
-            logging.info("Listing champion with id : {}".format(championID))
+            logger.info("Listing champion with id : {}".format(championID))
             try:
                 return self.skin_manager.show_champion(champion_id=championID)
             except:
@@ -61,7 +62,7 @@ class Server():
 
         @self.app.get("/skins/all")
         async def show_all_skins():
-            logging.info("Listing all skins")
+            logger.info("Listing all skins")
             try :
                 return self.skin_manager.list_all_skins()
             except:
@@ -70,14 +71,14 @@ class Server():
 
         @self.app.get("/skins/champion_id={championID}") #TODO
         async def show_champion_skins(championID):
-            logging.info("Listing all skins from champion {}".format(championID))
+            logger.info("Listing all skins from champion {}".format(championID))
             return
         
         ### SKINS PRICES ###
 
         @self.app.post("/prices")
         async def update_price(price_list : List[Price]):
-            logging.info("Updating skins prices")
+            logger.info("Updating skins prices")
             updated_skin_list = []
             for price in price_list:
                 if self.skin_manager.update_price(skin_id=price.skin_id,new_price=price.new_price):
@@ -87,7 +88,7 @@ class Server():
 
         @self.app.get("/prices/history/skin_id={skinID}")
         async def price_history(skinID):
-            logging.info("Listing price history for skin id {}".format(skinID))
+            logger.info("Listing price history for skin id {}".format(skinID))
             try:
                 return self.skin_manager.skin_price_history(skin_id= skinID)
             except:
@@ -95,7 +96,7 @@ class Server():
 
         @self.app.get("/prices/current/skin_id={skinID}")
         async def current_price(skinID):
-            logging.info("SHowing current price for skin id {}".format(skinID))
+            logger.info("SHowing current price for skin id {}".format(skinID))
             try:
                 return self.skin_manager.current_price(skin_id= skinID)
             except:
@@ -105,7 +106,7 @@ class Server():
 
         @self.app.post("/users")
         async def create_user(user : UserModel):
-            logging.info("Creating new user with name {}".format(user.name))
+            logger.info("Creating new user with name {}".format(user.name))
             account = UserAccount(
                 name = user.name,
                 mail= user.mail,

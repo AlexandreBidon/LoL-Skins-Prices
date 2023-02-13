@@ -1,6 +1,6 @@
 import requests
 
-url = 'http://0.0.0.0:8000'
+url = 'http://0.0.0.0:80'
 
 champion_data = {
     "champion_id" : 4,

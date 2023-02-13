@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  lol_db:
+    build: ./backend-db
+    container_name: lol_db
+    image: lol_db
+    ports:
+      - "5432:5432"
+  lol_api:
+    build: ./backend-api
+    restart: always
+    container_name: lol_api
+    image: lol_api
+    ports:
+      - "80:80"

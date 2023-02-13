@@ -4,6 +4,8 @@ from mail_service.mail_manager import MailManager
 from database.database import DataBase
 import logging
 
+logger = logging.getLogger('python_logs')
+
 class UserAccount():
 
     def __init__(
@@ -27,8 +29,8 @@ class UserAccount():
         for price in sales_data:
             if price.skin_id in self.skin_list:
                 skin_updated.append(price.skin_id)
-        logging.info("User {} could be interested in {} sales on the skins he wanted!".format(self.name,len(skin_updated)))
-        logging.info("Skin list : {}".format(skin_updated))
+        logger.info("User {} could be interested in {} sales on the skins he wanted!".format(self.name,len(skin_updated)))
+        logger.info("Skin list : {}".format(skin_updated))
         skin_info = []
         for skin_id in skin_updated:
             try:
@@ -51,10 +53,10 @@ class UserAccount():
                         }
                     )
             except:
-                logging.warning("Couldn't find the skin with id {}".format(skin_id))
+                logger.warning("Couldn't find the skin with id {}".format(skin_id))
         if len(skin_info) >0:
-            logging.info("User {} will be notified of {} sales on the skins he wants!".format(self.name,len(skin_info)))
-            logging.info("Skin list : {}".format(skin_info))
+            logger.info("User {} will be notified of {} sales on the skins he wants!".format(self.name,len(skin_info)))
+            logger.info("Skin list : {}".format(skin_info))
             self.mail_manager.send_sale_mail(sales_data=skin_info, to_mail= self.mail)
         else:
-            logging.info("No skins were in sales for user {}".format(self.name))
+            logger.info("No skins were in sales for user {}".format(self.name))

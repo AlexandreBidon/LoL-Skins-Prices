@@ -6,14 +6,14 @@ class DataBase():
 
     def __init__(
         self
-        ,host="0.0.0.0"
+        ,host="lol_db"
         ,database="lol_db"
         ,user="postgres"
         ,password="lol_admin"
         ):
 
         self.conn = psycopg2.connect(
-            host="0.0.0.0",
+            host="lol_db",
             database="lol_db",
             user="postgres",
             password="lol_admin")
