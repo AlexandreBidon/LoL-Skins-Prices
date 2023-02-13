@@ -1,6 +1,6 @@
 import uvicorn
 import logging
-from api.api_setup import Server
+from api.web_service import WebService
 from sys import stdout
 
 
@@ -9,7 +9,7 @@ def main():
     """
     Runs the web service
     """
-    web_service = Server()
+    web_service = WebService()
     uvicorn.run(web_service.app, host="0.0.0.0", port=80)
 
 

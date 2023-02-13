@@ -3,6 +3,7 @@ from api.data_model.price_model import Price
 from mail_service.mail_manager import MailManager
 from database.database import DataBase
 import logging
+import os
 
 logger = logging.getLogger('python_logs')
 
@@ -17,7 +18,12 @@ class UserAccount():
         self.mail = mail
         self.skin_list = skin_list
         self.mail_manager = MailManager()
-        self.db_access = DataBase()
+        self.db_access = DataBase(
+            host = os.getenv("POSTGRES_HOST"),
+            database = os.getenv("POSTGRES_DB"),
+            user = os.getenv("POSTGRES_USER"),
+            password = os.getenv("POSTGRES_PASSWORD")
+        )
 
     def update(self,name,mail,skin_list):
         if self.name == name:

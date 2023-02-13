@@ -14,7 +14,7 @@ from user.user_account import UserAccount
 
 logger = logging.getLogger('python_logs')
 
-class Server():
+class WebService():
 
     def __init__(self):
         self.app = FastAPI()
@@ -22,8 +22,8 @@ class Server():
         self.user_alert = UserAlert()
 
         @self.app.get("/")
-        async def get():
-            return "Welcome to the LoL Skin Price API!"
+        async def home():
+            return {"msg":"Welcome to the LoL Skin Price API!"}
 
         ### CHAMPIONS ###
 

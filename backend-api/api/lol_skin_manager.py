@@ -1,5 +1,5 @@
 import logging
-
+import os
 
 from database.database_manager import DataBaseManager
 from api.data_model.champion_model import ChampionModel
@@ -11,7 +11,12 @@ class LoLSkinManager():
 
 
     def __init__(self):
-        self.__db_manager = DataBaseManager()
+        self.__db_manager = DataBaseManager(
+            host = os.getenv("POSTGRES_HOST"),
+            database = os.getenv("POSTGRES_DB"),
+            user = os.getenv("POSTGRES_USER"),
+            password = os.getenv("POSTGRES_PASSWORD")
+        )
 
     ### CHAMPIONS ###
 

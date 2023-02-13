@@ -14,3 +14,8 @@ services:
     image: lol_api
     ports:
       - "80:80"
+    environment:
+      POSTGRES_HOST: lol_db
+      POSTGRES_DB: lol_db 
+      POSTGRES_PASSWORD: lol_admin
+      POSTGRES_USER: postgres

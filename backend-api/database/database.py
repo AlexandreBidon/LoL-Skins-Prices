@@ -6,17 +6,17 @@ class DataBase():
 
     def __init__(
         self
-        ,host="lol_db"
-        ,database="lol_db"
-        ,user="postgres"
-        ,password="lol_admin"
+        ,host
+        ,database
+        ,user
+        ,password
         ):
 
         self.conn = psycopg2.connect(
-            host="lol_db",
-            database="lol_db",
-            user="postgres",
-            password="lol_admin")
+            host=host,
+            database=database,
+            user=user,
+            password=password)
 
         self.cur = self.conn.cursor()
 
