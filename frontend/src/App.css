@@ -1,0 +1,6 @@
+@font-face {
+    font-family: "Light";   /*Can be any text*/
+    src: local("FrizQuadrata"),
+      url("./fonts/Friz Quadrata Regular.ttf") format("truetype");
+  }
+  

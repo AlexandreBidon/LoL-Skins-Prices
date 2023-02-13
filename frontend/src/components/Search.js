@@ -34,7 +34,7 @@ function Search({ details }) {
   return (
     <section className="garamond">
       <div className="white ma0 grow">
-        <h2 className="f2">League of Legends Skins DB</h2>
+        <h1 style={{fontFamily: "Light"}} className="f2">League of Legends Skins DB</h1>
       </div>
       <div className="pa2">
         <input 
