@@ -51,9 +51,9 @@ class MailManager(Mail):
         """
         for skin in sales_data:
             skin_html = """<img src="http://ddragon.leagueoflegends.com/cdn/img/champion/tiles/{champion_name}_{skin_num}.jpg" width="300" height="300" style="margin-top:20px;">
-                                <h3>
+                                <h2 style="color:#84abd9">
                                     {skin_name}
-                                </h3>
+                                </h2>
                                 <h3>
                                     Current price : {current_price}
                                     Last price : {last_price}

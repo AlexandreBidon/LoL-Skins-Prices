@@ -19,7 +19,7 @@ skin_data = {
 user_data = {
     "name": "Alexandre",
     "mail" : "alexandre.bidon.44@gmail.com",
-    "skin_list" : [268005,268004]
+    "skin_list" : [268005,268004,245001,24005,24014,238003,238013]
 }
 
 new_price = [
@@ -34,7 +34,23 @@ new_price = [
     {
         "skin_id" : 245001,
         "new_price" : 500
-    }    
+    },
+    {
+        "skin_id" : 24005,
+        "new_price" : 500
+    },
+    {
+        "skin_id" : 24014,
+        "new_price" : 500
+    },
+    {
+        "skin_id" : 238003,
+        "new_price" : 500
+    },
+    {
+        "skin_id" : 238013,
+        "new_price" : 500
+    }  
 ]
 # y = requests.get(url + '/management/reset')
 # print(y.text)
