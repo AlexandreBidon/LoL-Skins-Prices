@@ -26,8 +26,15 @@
 ### Launch the tests
 
 ## How it works
+### API
 **[The list of all the endpoints can be found here](docs/ENDPOINTS.md)**.
 
+### Database
+
+### Frontend
+<p align="center">
+    <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/master/docs/assets/demo_web.png" width="100%">
+</p>
 ## Credits
 ### Authors
 - Tiroumalai Freddy ([tiroumalaifreddy](https://github.com/tiroumalaifreddy))
