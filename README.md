@@ -14,10 +14,13 @@
 ## Presentation
 **Note : This repo is part of a last year project at ENSAI school. The subject can be [found here](docs/Sujet%20projet%20g%C3%A9nie%20logiciel.pdf). As a result, this project is not intended for production use. Several issues are present in the code, such as potential SQL Injection.**
 
+
+Skins are cosmetic in the game League of Legends. They can be bought for real money and are sometimes on sales. The goal of this project is to track the prices of skins and to notify the user when a skin he likes is on sales.
+
 ### Features
 - See all the skins and their current prices on the website
 - Create an account and add your favorite skins to your list
-- Receive an email when a skin you like is in sale
+- Receive an email when some skins you like are on sale
 
 ### Tech stack
 - Logging system
@@ -26,7 +29,37 @@
 - Backend API using FastAPI
 
 ## How to run
+### Requirements
+```
+sudo apt  install git
+sudo apt  install docker
+sudo apt  install docker-compose
+```
+### Install App
+First, clone the repository :
+```
+git clone https://github.com/AlexandreBidon/LoL-Skins-Prices.git
+```
+Add a `.env` file in directory with the following variables :
+```
+MAIL_ADDRESS=
+MAIL_PASSWORD=
+```
+Those variables are used to send notification mail when a skin is in sale.
+
+### Run App
+
+You can then run the app with `docker-compose` like this :
+```
+docker compose up --build
+```
+
+You can then access
+- the API at http://localhost:3000
+- the website at http://localhost:80
+
 ### Demonstration
+
 
 
 ### Launch the tests
