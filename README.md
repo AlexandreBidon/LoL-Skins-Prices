@@ -80,7 +80,7 @@ Start by running the application. Once the application is running, go to the web
     <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/master/docs/assets/demonstration/kalista_not_found.png" width="80%">
     
 </p>
-<p align="center"><b>Championship Kalista</b></p>
+<p align="center"><b>No result found when we search Championship Kalista</b></p>
 
 
 ### Let's add a champion to the app
@@ -102,6 +102,24 @@ Once you execute the `POST` operation you should see this result ```{"success": 
 
 ### Adding a new skin
 
+We can now do the same process to add the skin to the app. In the documentation find the `POST` `/skins` endpoint. We will use the "Try it out" feature to add Championship Kalista.
+You will have to add the following data:
+```json
+{
+  "champion_id": 429,
+  "skin_id": 429002,
+  "name": "Championship Kalista",
+  "skin_num": 2,
+  "base_price": 2000
+}
+```
+
+Just like before, you should have a result ```{"success": true}```. We can now go back to the website to see if the skin is here. Once we have refreshed the website we can see the skin!
+<p align="center">
+    <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/master/docs/assets/demonstration/kalista_skin_added.png" width="80%">
+    
+</p>
+<p align="center"><b>Championship Kalista is on the website</b></p>
 ### Creating a user account
 
 ### Updating the prices of skins
