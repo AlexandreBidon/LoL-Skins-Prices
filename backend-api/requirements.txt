@@ -3,3 +3,4 @@ psycopg2-binary==2.9.5
 uvicorn==0.20.0
 httpx
 pytest
+email_validator
