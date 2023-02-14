@@ -37,7 +37,34 @@
 You can also see
 
 ### Database
+```mermaid
+erDiagram
+    champions {
+        int-PRIMARY_KEY ChampionId
+        string Name
+        string Title
+    }
+    Skins {
+        int-PRIMARY_KEY SkinId
+        string Name
+        int Num
+    }
 
+    Champions_Skins {
+        int-FOREIGN_KEY ChampionId
+        int-FOREIGN_KEY SkinId
+    }
+
+    SkinPrices {
+        int-FOREIGN_KEY SkinId
+        int Price
+        date ChangedOn
+    }
+
+    Skins ||--|{ SkinPrices : is_priced
+    champions ||--|{ Champions_Skins : have
+    Champions_Skins ||--|| Skins : references
+```
 ### Frontend
 <p align="center">
     <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/master/docs/assets/demo_web.png" width="100%">
