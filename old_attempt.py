@@ -5,7 +5,7 @@ url = 'http://0.0.0.0:80'
 user_data = {
     "name": "Alexandre",
     "mail" : "alexandre.bidon.44@gmail.com",
-    "skin_list" : [268005,268004,245001,24005,24014,238003,238013]
+    "skin_list" : [268004,245001,24014,238003]
 }
 
 new_price = [
@@ -39,8 +39,8 @@ new_price = [
     }  
 ]
 
-# y = requests.post(url + '/users', json = user_data)
-# print(y.text)
+y = requests.post(url + '/users', json = user_data)
+print(y.text)
 
 # x = requests.get(url + '/champions/all')
 # print(x.text)
@@ -49,11 +49,8 @@ new_price = [
 # x = requests.get(url + '/prices/history/skin_id=268005')
 # print(x.text)
 
-# y = requests.post(url + '/prices', json = new_price)
-# print(y.text)
+y = requests.post(url + '/prices', json = new_price)
+print(y.text)
 
 # x = requests.get(url + '/prices/history/skin_id=268005')
 # print(x.text)
-
-x = requests.get(url + '/skins/web')
-print(x.text)

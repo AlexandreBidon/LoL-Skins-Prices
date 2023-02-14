@@ -2,15 +2,21 @@ import logging
 import datetime
 import smtplib
 from email.message import EmailMessage
+import os
+
+logger = logging.getLogger('python_logs')
+
 
 class Mail():
 
     def __init__(
         self,
-        email_address = "lol.skins.prices@gmail.com",
-        email_password = "wtzholqwnhshtkfm"):
+        email_address = os.getenv("MAIL_ADDRESS"),
+        email_password = os.getenv("MAIL_PASSWORD")):
         self.email_address = email_address
         self.email_password = email_password
+        logger.info("Email address : {}".format(self.email_address))
+        logger.info("Email password : {}".format(self.email_password))
     
     def send_mail(
         self,

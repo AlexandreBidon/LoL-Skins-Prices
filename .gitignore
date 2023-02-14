@@ -1,2 +1,3 @@
 # Ignore the logging system
 info.log
+.env

@@ -3,13 +3,14 @@ import datetime
 import smtplib
 from email.message import EmailMessage
 from mail_service.mail import Mail
+import os
 
 class MailManager(Mail):
 
     def __init__(
         self,
-        email_address = "lol.skins.prices@gmail.com",
-        email_password = "wtzholqwnhshtkfm"):
+        email_address = os.getenv("MAIL_ADDRESS"),
+        email_password = os.getenv("MAIL_PASSWORD")):
         super().__init__(email_address=email_address,email_password=email_password)
     
     def send_sale_mail(self, sales_data, to_mail :str):

@@ -19,6 +19,8 @@ services:
       POSTGRES_DB: lol_db 
       POSTGRES_PASSWORD: lol_admin
       POSTGRES_USER: postgres
+      MAIL_ADDRESS: ${MAIL_ADDRESS}
+      MAIL_PASSWORD: ${MAIL_PASSWORD}
   lol_website:
     build: ./frontend/
     restart: always

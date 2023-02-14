@@ -130,7 +130,7 @@ class WebService():
             logger.info("Creating new user with name {}".format(user.name))
             account = UserAccount(
                 name = user.name,
-                mail= user.mail,
+                email= user.mail,
                 skin_list= user.skin_list
             )
             self.user_alert.subscribe(account)
