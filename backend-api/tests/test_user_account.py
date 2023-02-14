@@ -1,4 +1,5 @@
 from user.user_account import UserAccount
+from email_validator import validate_email, EmailNotValidError
 import unittest
 
 
@@ -15,11 +16,11 @@ class TestMailManager(unittest.TestCase):
         self.assertEqual(user.skin_list,[1,2,3])
 
     def test_user_invalid_email(self):
-        with self.assertRaises(SyntaxError) as context:
+        with self.assertRaises(EmailNotValidError) as context:
             user = UserAccount(
                 name="test",
                 email = "test@test@test.com-",
                 skin_list=[1,2,3]
             )
 
-        self.assertTrue('Email not valid' in str(context.exception))
+        self.assertTrue('The email address is not valid. It must have exactly one @-sign.' in str(context.exception))
