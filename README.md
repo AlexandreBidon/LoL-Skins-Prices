@@ -27,6 +27,8 @@ Skins are cosmetic in the game League of Legends. They can be bought for real mo
 - React frontend
 - PostgreSQL database
 - Backend API using FastAPI
+- CI/CD using Github workflows
+- Python Scripts to scrap new prices (not implemented in docker compose)
 
 ## How to run
 ### Requirements
@@ -58,14 +60,11 @@ You can then access
 - the API at http://localhost:80
 - the website at http://localhost:3000
 
-### Demonstration
+## Demonstration
 
 In this section, we present a way to test all the features of the projet.
 
-<details>
-  <summary>App demonstration</summary>
-  
-  ## Adding champions and skins
+### Adding champions and skins
  
  We will learn how to add the following skin into the app :
  
@@ -75,22 +74,44 @@ In this section, we present a way to test all the features of the projet.
 </p>
 <p align="center"><b>Championship Kalista</b></p>
 
-  Start by running the application. Once the application is running, go to the website at http://localhost:3000. Search the skin `Championship Kalista`. They shouldn't be any result. That is because the skin and it's associated champion are not added by default in the app.
+Start by running the application. Once the application is running, go to the website at http://localhost:3000. Search the skin `Championship Kalista`. There should be no result. That is because the skin and it's associated champion are not added by default in the app.
 
-  ### Let's add a champion to the app
-
-  So to add the skin `Championship Kalista` into the app, we first need to add the champion `Kalista`
-
-
-
-</details>
+<p align="center">
+    <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/master/docs/assets/demonstration/kalista_not_found.png" width="80%">
+    
+</p>
+<p align="center"><b>Championship Kalista</b></p>
 
 
+### Let's add a champion to the app
+
+So to add the skin `Championship Kalista` into the app, we first need to add the champion `Kalista`.
+
+Because we are using the Riot API to have the skins images, we need to provide the right information to our API.
+
+To add the champion we will use a `POST` operation on the endpoint `/champions`. The easiest way to do so is to go to the documentation at http://0.0.0.0/docs#/default/create_champion_champions_post. You can then use the "Try it out" feature to create Kalista.
+To do so you will have to provide the following information :
+```json
+{
+  "champion_id": 429,
+  "name": "Kalista",
+  "title": "the Spear of Vengeance"
+}
+```
+Once you execute the `POST` operation you should see this result ```{"success": true}```. That means that the champion was successfully added to database!
+
+### Adding a new skin
+
+### Creating a user account
+
+### Updating the prices of skins
 
 ## How it works
 ### API
 **[The list of all the endpoints can be found here](docs/ENDPOINTS.md)**.
-You can also see
+You can also find all the endpoints in auto-doc at http://localhost:80/docs.
+
+All `User` object have the comportement of an **observer**. They subscribe to the `UserAlert` to be notified of new prices on skins.
 
 ### Database
 ```mermaid
@@ -122,6 +143,9 @@ erDiagram
     Champions_Skins ||--|| Skins : references
 ```
 ### Frontend
+
+The website was made using **React**. It can be used to see all the skins and their current prices. It is not possible to create users, modify prices and see prices history from the site.
+
 <p align="center">
     <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/master/docs/assets/demo_web.png" width="100%">
 </p>
@@ -142,3 +166,4 @@ erDiagram
 - Add authentification for users in the API
 - Add more tests (mock DB and mail object)
 - Improve the frontend : add a user page to control the account from here
+- Add a way to plot price history for a skin (in the frontend)
