@@ -17,6 +17,10 @@
 
 Skins are cosmetic in the game League of Legends. They can be bought for real money and are sometimes on sales. The goal of this project is to track the prices of skins and to notify the user when a skin he likes is on sales.
 
+<p align="center">
+    <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/master/docs/assets/demo_gif.gif" width="100%">
+</p>
+
 ### Features
 - See all the skins and their current prices on the website
 - Create an account and add your favorite skins to your list
@@ -169,14 +173,15 @@ You can post these data. Once it is done you should receive an email.
     <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/master/docs/assets/demonstration/mail.png" width="80%">
     
 </p>
-<p align="center"><b>Championship Kalista is on the website</b></p>
+<p align="center"><b>Mail notifying us of new sales</b></p>
 
 ## How it works
 ### API
 **[The list of all the endpoints can be found here](docs/ENDPOINTS.md)**.
+
 You can also find all the endpoints in auto-doc at http://localhost:80/docs.
 
-All `User` object have the comportement of an **observer**. They subscribe to the `UserAlert` to be notified of new prices on skins.
+All `User` object have the behavior of an **observer**. They subscribe to the `UserAlert` to be notified of new prices on skins.
 
 ### Database
 
@@ -218,6 +223,8 @@ The website was made using **React**. It can be used to see all the skins and th
 </p>
 
 ### Mailing system
+The mailing uses the SMTP library in python.
+
 <p align="center">
     <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/master/docs/assets/demo_mail.png" width="100%">
 </p>
