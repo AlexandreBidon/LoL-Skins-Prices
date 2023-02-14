@@ -35,7 +35,8 @@ VALUES
 (268, 'Azir', 'the Emperor of the Sands'),
 (245, 'Ekko', 'the Boy Who Shattered Time'),
 (24, 'Jax', 'Grandmaster at Arms'),
-(238, 'Zed', 'the Master of Shadows');
+(238, 'Zed', 'the Master of Shadows'),
+(161, 'Vel''Koz', 'the Eye of the Void');
 
 INSERT INTO Skins
 VALUES
@@ -45,7 +46,11 @@ VALUES
 (24005, 'Jaximus', 5),
 (24014, 'Mecha Kingdoms Jax', 14),
 (238003, 'PROJECT: Zed', 3),
-(238013, 'Galaxy Slayer Zed', 13);
+(238013, 'Galaxy Slayer Zed', 13),
+(103001, 'Dynasty Ahri', 1),
+(103002, 'Midnight Ahri', 2),
+(103003, 'Foxfire Ahri', 3),
+(161004, 'Infernal Vel''Koz', 4);
 
 INSERT INTO Champions_Skins
 VALUES
@@ -55,7 +60,11 @@ VALUES
 (24, 24005),
 (24, 24014),
 (238, 238003),
-(238, 238013);
+(238, 238013),
+(103, 103001),
+(103, 103002),
+(103, 103003),
+(161, 161004);
 
 INSERT INTO SkinPrices
 VALUES
@@ -68,4 +77,8 @@ VALUES
 (24005, 1820, '2023-02-01'),
 (24014, 1820, '2023-02-01'),
 (238003, 1820, '2023-02-01'),
-(238013, 1820, '2023-02-01');
+(238013, 1820, '2023-02-01'),
+(103001, 1820, '2023-02-01'),
+(103002, 1820, '2023-02-01'),
+(103003, 1820, '2023-02-01'),
+(161004, 1820, '2023-02-01');

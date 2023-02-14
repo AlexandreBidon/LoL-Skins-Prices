@@ -99,7 +99,7 @@ class LoLSkinManager():
             skins_list[i]["price"] = self.current_price(skins_list[i]["id"])["price"]
             result = self.__db_manager.query(
                 """SELECT champions.Name FROM champions JOIN Champions_Skins USING(ChampionId) WHERE Champions_Skins.SkinId = {}""".format(skins_list[i]["id"]))
-            skins_list[i]["imgPath"] = str(result[0][0]) + "_" + str(skins_list[i]["num"]) + ".jpg"
+            skins_list[i]["imgPath"] = str(result[0][0]).replace("'", '').title() + "_" + str(skins_list[i]["num"]) + ".jpg"
         return(skins_list)
 
     ### PRICES ###
