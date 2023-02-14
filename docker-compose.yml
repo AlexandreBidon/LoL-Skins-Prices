@@ -20,15 +20,10 @@ services:
       POSTGRES_PASSWORD: lol_admin
       POSTGRES_USER: postgres
   lol_website:
-    build:
-      context: frontend
-      dockerfile: Dockerfile
+    build: ./frontend/
     restart: always
     container_name: lol_website
     image: lol_website
-    volumes:
-      - '.:/app'
-      - '/app/node_modules'
     ports:
       - "3000:3000"
     environment:
