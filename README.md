@@ -55,14 +55,37 @@ docker compose up --build
 ```
 
 You can then access
-- the API at http://localhost:3000
-- the website at http://localhost:80
+- the API at http://localhost:80
+- the website at http://localhost:3000
 
 ### Demonstration
 
+In this section, we present a way to test all the features of the projet.
+
+<details>
+  <summary>App demonstration</summary>
+  
+  ## Adding champions and skins
+ 
+ We will learn how to add the following skin into the app :
+ 
+<p align="center">
+    <img src="http://ddragon.leagueoflegends.com/cdn/img/champion/splash/Kalista_2.jpg" width="80%">
+    
+</p>
+<p align="center"><b>Championship Kalista</b></p>
+
+  Start by running the application. Once the application is running, go to the website at http://localhost:3000. Search the skin `Championship Kalista`. They shouldn't be any result. That is because the skin and it's associated champion are not added by default in the app.
+
+  ### Let's add a champion to the app
+
+  So to add the skin `Championship Kalista` into the app, we first need to add the champion `Kalista`
 
 
-### Launch the tests
+
+</details>
+
+
 
 ## How it works
 ### API
