@@ -120,9 +120,56 @@ Just like before, you should have a result ```{"success": true}```. We can now g
     
 </p>
 <p align="center"><b>Championship Kalista is on the website</b></p>
+
 ### Creating a user account
 
+Now that we added a skin in, we want to be notified of the next skin sales! To be notified, we will have to create an account. With this account we will specify the skins we like and how to contact us.
+
+To create an account we have to use the `POST` `/users` endpoint. In the "Try it out" feature of the doc we can send the following data (you will have to add you email) :
+
+```json
+{
+  "name": "User test",
+  "mail": "add your mail here",
+  "skin_list": [
+    268004,103001,245001
+  ]
+}
+```
+
+This will create an account for us and track the price of 3 skins. Once there on sales we will receive an email.
+
 ### Updating the prices of skins
+
+We now have to update the price of some skins. Once we do so we will receive our notification email.
+
+We can update the prices of skins using the `POST` `prices` endpoint. We just have to provide data like this :
+
+```json
+[
+  {
+    "skin_id": 268004,
+    "new_price": 500
+  },
+  {
+    "skin_id": 103001,
+    "new_price": 600
+  },
+  {
+    "skin_id": 245001,
+    "new_price": 500
+  }
+]
+```
+**Note : You can't have two prices for one skin on one day. As a result, we can't update the price of the Championship Kalista skin in demo**
+
+You can post these data. Once it is done you should receive an email.
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/AlexandreBidon/LoL-Skins-Prices/master/docs/assets/demonstration/mail.png" width="80%">
+    
+</p>
+<p align="center"><b>Championship Kalista is on the website</b></p>
 
 ## How it works
 ### API
@@ -132,6 +179,8 @@ You can also find all the endpoints in auto-doc at http://localhost:80/docs.
 All `User` object have the comportement of an **observer**. They subscribe to the `UserAlert` to be notified of new prices on skins.
 
 ### Database
+
+Here is the Database architecture :
 ```mermaid
 erDiagram
     champions {
