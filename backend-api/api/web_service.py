@@ -1,4 +1,6 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+
 import logging
 from typing import List
 
@@ -20,6 +22,16 @@ class WebService():
         self.app = FastAPI()
         self.skin_manager = LoLSkinManager()
         self.user_alert = UserAlert()
+        origins = [
+            "*"
+        ]
+        self.app.add_middleware(
+            CORSMiddleware,
+            allow_origins=origins,
+            allow_credentials=True,
+            allow_methods=["*"],
+            allow_headers=["*"],
+        )
 
         @self.app.get("/")
         async def home():
@@ -67,6 +79,15 @@ class WebService():
                 return self.skin_manager.list_all_skins()
             except:
                 return HTTPException(status_code=404, detail="Couldn't list all skins")
+
+        @self.app.get("/skins/web")
+        async def show_all_skins_web():
+            logger.info("Listing all skins for the website")
+            try :
+                return self.skin_manager.list_all_skins_web()
+            except Exception as e:
+                logger.error(e)
+                return HTTPException(status_code=404, detail="Couldn't list all skins for the web")
 
 
         @self.app.get("/skins/champion_id={championID}") #TODO

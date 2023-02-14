@@ -6,6 +6,7 @@ from api.data_model.champion_model import ChampionModel
 from api.data_model.skin_model import SkinModel
 
 
+logger = logging.getLogger('python_logs')
 
 class LoLSkinManager():
 
@@ -92,6 +93,15 @@ class LoLSkinManager():
             logging.info("Couldn't create skin")
         return(result)
     
+    def list_all_skins_web(self):
+        skins_list = self.list_all_skins()
+        for i in range(len(skins_list)):
+            skins_list[i]["price"] = self.current_price(skins_list[i]["id"])["price"]
+            result = self.__db_manager.query(
+                """SELECT champions.Name FROM champions JOIN Champions_Skins USING(ChampionId) WHERE Champions_Skins.SkinId = {}""".format(skins_list[i]["id"]))
+            skins_list[i]["imgPath"] = str(result[0][0]) + "_" + str(skins_list[i]["num"]) + ".jpg"
+        return(skins_list)
+
     ### PRICES ###
 
     def update_price(self, skin_id : int, new_price : int):
